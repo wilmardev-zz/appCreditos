@@ -45,8 +45,8 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="${pageContext.servletContext.contextPath}/view/creditos.jsp">Creditos</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=Listar">Listar Creditos</a></li>
-                                <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=Get">Credito Mas Utilizado</a></li>
-                                <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=Get" >Credito con Mayor Acumulado</a></li>
+                                <li><a href="#">Credito Mas Utilizado</a></li>
+                                <li><a href="#" >Credito con Mayor Acumulado</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/index.jsp" class="navbar-right">Sign out</a></li>
                             </ul>
                         </div>
