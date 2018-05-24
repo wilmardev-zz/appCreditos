@@ -70,7 +70,7 @@ public class CreditoServlet extends HttpServlet {
             case "Listar":
                 List<Credito> creditosList = cBusinessImpl.ObtenerCreditos();
                 session.setAttribute("creditosList", creditosList);
-                rd = request.getRequestDispatcher("view/creditosList.jsp");
+                rd = request.getRequestDispatcher("views/creditosList.jsp");
                 break;
             default:
                 break;
