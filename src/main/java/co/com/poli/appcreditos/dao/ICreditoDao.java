@@ -15,9 +15,11 @@ import java.util.List;
 public interface ICreditoDao {
     
     List<Credito> ObtenerCreditos();
+    Credito ObtenerCredito(String NroCredito);
     String ObtenerCreditoMasutilizado();
     String CrearCredito(Credito credito);
     String ObtenerPrestamoMayorAcumulado();
     String ObtenerPrestamistas();
+    
     
 }

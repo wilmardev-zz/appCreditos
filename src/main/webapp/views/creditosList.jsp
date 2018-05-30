@@ -44,14 +44,14 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="${pageContext.servletContext.contextPath}/view/menu.jsp">CreditosApp</a>
+                            <a class="navbar-brand" href="${pageContext.servletContext.contextPath}/views/Menu.jsp">CreditosApp</a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
-                                <li><a href="${pageContext.servletContext.contextPath}/view/creditos.jsp">Creditos</a></li>
-                                <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=Listar">Listar Creditos</a></li>
-                                <li><a href="#">Credito Mas Utilizado</a></li>
-                                <li><a href="#" >Credito con Mayor Acumulado</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/views/creditos.jsp">Credits</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=Listar">List Credits</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=CredMasUtilizado">Most used Credit</a></li>
+                                <li><a href="#" >Credit highest accumulated</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/index.jsp" class="navbar-right">Sign out</a></li>
                             </ul>
                         </div>
@@ -61,9 +61,9 @@
         </div>
 
 <div class="container">
-    <form >
-        <h1 style="color: white">Courses</h1>
-        <h4 style="color: white">This are the list for all courses registered</h4> <br>           
+    <form>
+        <h1 style="color: white">Credit</h1>
+        <h4 style="color: white">This are the list for all credits registered</h4> <br>           
         <table  class="table table-dark">
             <thead>
                 <tr>
@@ -98,18 +98,3 @@
         </table>
 </div>
 </html>
-
-<script type="text/javascript">
-
-    window.onload = alertMessage;
-    function alertMessage() {
-        var MsgUpdated = '<%=session.getAttribute("CourseUpdated")%>';
-        var MsgDeleted = '<%=session.getAttribute("CourseDeleted")%>';
-        if (MsgUpdated != "null") {
-            alertify.alert('Notification', MsgUpdated);
-        }
-        if (MsgDeleted != "null") {
-            alertify.alert('Notification', MsgDeleted);
-        }
-    }
-</script>

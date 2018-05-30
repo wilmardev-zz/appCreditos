@@ -13,7 +13,7 @@
         <meta name="author" content="">
         <link rel="icon" href="../../../../favicon.ico">
 
-        <title>Menu</title>
+        <title>Credits</title>
 
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -48,15 +48,15 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="${pageContext.servletContext.contextPath}/view/menu.jsp">CourseApp</a>
+                        <a class="navbar-brand" href="${pageContext.servletContext.contextPath}/views/Menu.jsp">CreditosApp</a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="${pageContext.servletContext.contextPath}/view/users.jsp">Users</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/view/courses.jsp">Courses</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/UserServlet?action=Get">List Users</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/CourseServlet?action=Get" >List Courses</a></li>
-                            <li><a href="${pageContext.servletContext.contextPath}/index.jsp" class="navbar-right">Sign out</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/views/creditos.jsp">Credits</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=Listar">List Credits</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=CredMasUtilizado">Most used Credit</a></li>
+                                <li><a href="#" >Credit highest accumulated</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/index.jsp" class="navbar-right">Sign out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -70,40 +70,85 @@
         <div class="container">
 
             <form method="post"
-                  action="${pageContext.servletContext.contextPath}/CourseServlet">
+                  action="${pageContext.servletContext.contextPath}/CreditoServlet">
+
                 <div class="form-group">
-                    <input name="txtCourseId" type="text" required="required"
+                    <input name="txtNroDocumento" type="text" required="required"
                            class="form-control" 
-                           placeholder="Course Id">
+                           placeholder="Document Number">
                 </div>
 
                 <div class="form-group">
-                    <input name="txtName" type="text" required="required"
+                    <input name="txtNombres" type="text" required="required"
                            class="form-control" 
                            placeholder="Name">
                 </div>
 
                 <div class="form-group">
-                    <input name="txtHours" type="text" required="required"
+                    <input name="txtApellidos" type="text" required="required"
                            class="form-control" 
-                           placeholder="Hours">
+                           placeholder="LastName">
                 </div>
-
-                <div class="form-group">
-                    <input name="txtValue" type="text" required="required"
-                           class="form-control" 
-                           placeholder="Value">
+                
+                <div class="form-group">Monto del Crédito
+                    <select name="txtMonto" id="inputState" class="form-control">
+                        <option value="NaN" selected>Seleccione...</option>
+                        <option value="500" >500</option>
+                        <option value="600" >600</option>
+                        <option value="700" >700</option>
+                        <option value="800" >800</option>
+                        <option value="900" >900</option>
+                        <option value="1000" >1000</option>                        
+                        <option value="1100" >1100</option>
+                        <option value="1200" >1200</option>
+                        <option value="1300" >1300</option>
+                        <option value="1400" >1400</option>
+                        <option value="1500" >1500</option>
+                        <option value="1600" >1600</option>
+                        <option value="500" >1700</option>
+                        <option value="600" >1800</option>
+                        <option value="700" >1900</option>
+                        <option value="800" >2000</option>
+                        <option value="900" >2100</option>
+                        <option value="1000" >2200</option>                        
+                        <option value="1100" >2300</option>
+                        <option value="1200" >2400</option>
+                        <option value="1300" >2500</option>
+                        <option value="1400" >2600</option>
+                        <option value="1500" >2700</option>
+                        <option value="1600" >2800</option>   
+                        <option value="1500" >2900</option>
+                        <option value="1600" >3000</option>         
+                    </select>
                 </div>
+                
+                
+                <div class="form-group">Tipo de Trabajador: &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="txtTipoTrabajador" value="1" required="required"> Independiente &nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="txtTipoTrabajador" value="2"> Dependiente<br>
+                </div>
+                
+                
+                <div class="form-group">Tipo de Crédito: &nbsp;&nbsp;&nbsp;&nbsp;   
+                    <input type="radio" name="txtTipoCredito" value="1" required="required"> Vivienda &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="txtTipoCredito" value="2"> Estudio &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="txtTipoCredito" value="3"> Libre Inversion<br>
+                </div>
+                
+                
 
-                <div class="form-group">
-                    <select name="txt" id="inputState" class="form-control">
-                        <option value="Active" selected>Active</option>
-                        <option value="Inactive" >Inactive</option>
+                <div class="form-group">Trabaja en la compañía
+                    <select name="txtTrabajaCompañia" id="inputState" class="form-control" required="required">
+                        <option value="NaN" selected>Seleccione...</option>
+                        <option value="true" >Sí</option>
+                        <option value="false" >No</option>
                     </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary" name="action" value="Create">Submit</button>
 
+                
+                
             </form>
         </div>
 
@@ -120,14 +165,3 @@
 
 </body>
 </html>
-
-<script type="text/javascript">
-
-    function alertMessage() {
-        var MsgCreated = '<%=session.getAttribute("CourseCreated")%>';
-        if (MsgCreated != "null") {
-            alertify.alert('Notification', MsgCreated);
-            location.reload();
-        }
-    }
-</script>

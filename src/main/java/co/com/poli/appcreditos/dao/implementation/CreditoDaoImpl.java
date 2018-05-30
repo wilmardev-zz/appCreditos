@@ -108,6 +108,18 @@ public class CreditoDaoImpl implements ICreditoDao{
     public String ObtenerPrestamistas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Credito ObtenerCredito(String NroCredito) {
+        Credito credit = null;
+        for(Credito item : DatosCredito.getListCredit()){
+            if(item.getNroCredito().equals(NroCredito)){
+                credit = item;
+                break;
+            }
+        }
+        return credit;
+    }
     
     
     

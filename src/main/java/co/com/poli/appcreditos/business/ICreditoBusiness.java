@@ -15,6 +15,7 @@ import java.util.List;
 public interface ICreditoBusiness {
     
     List<Credito> ObtenerCreditos();
+    Credito ObtenerCredito(String NroCredito);
     String ObtenerCreditoMasutilizado();
     String CrearCredito(Credito credito);
     String ObtenerPrestamoMayorAcumulado();

@@ -9,6 +9,7 @@ import co.com.poli.appcreditos.business.implementation.CreditoBusinessImpl;
 import co.com.poli.appcreditos.model.Credito;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,8 +41,10 @@ public class CreditoServlet extends HttpServlet {
         String action = request.getParameter("action");
         switch (action) {
             case "Create":
-
-                String NroCredito = request.getParameter("txtNroCredito");
+                List<Credito> cred = cBusinessImpl.ObtenerCreditos();
+                int position = cred.size() - 1;
+                Credito Credit = cred.get(position);
+                int NroCredito = Integer.parseInt(Credit.getNroCredito()) + 1;
                 String NroDocumento = request.getParameter("txtNroDocumento");
                 String Nombres = request.getParameter("txtNombres");
                 String Apellidos = request.getParameter("txtApellidos");
@@ -50,15 +53,18 @@ public class CreditoServlet extends HttpServlet {
                 int TipoCredito = Integer.parseInt(request.getParameter("txtTipoCredito")); //1-Vivienda, 2-Estudio, 3-LibreInversion
                 boolean TrabajaCompañia = Boolean.parseBoolean(request.getParameter("txtTrabajaCompañia"));
 
-                Credito credito = new Credito(NroCredito, NroDocumento, Nombres, Apellidos, Monto, TipoTrabajador, TipoCredito, TrabajaCompañia);
+                Credito credito = new Credito(String.valueOf(NroCredito), NroDocumento, Nombres, Apellidos, Monto, TipoTrabajador, TipoCredito, TrabajaCompañia);
                 String mensaje = cBusinessImpl.CrearCredito(credito);
                 session.setAttribute("creditoCreated", mensaje);
                 List<Credito> creditoList = cBusinessImpl.ObtenerCreditos();
                 session.setAttribute("creditoList", creditoList);
-                rd = request.getRequestDispatcher("view/creditoList.jsp");
+                session.setAttribute("creditoMasUtilizado", "null");
+                rd = request.getRequestDispatcher("views/creditosList.jsp");
                 break;
             case "CredMasUtilizado":
-
+                String resp = cBusinessImpl.ObtenerCreditoMasutilizado();
+                session.setAttribute("creditoMasUtilizado", resp);
+                rd = request.getRequestDispatcher("views/Menu.jsp");
                 break;
             case "CredMasAcum":
 

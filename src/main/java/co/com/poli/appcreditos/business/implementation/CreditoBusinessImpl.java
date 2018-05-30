@@ -9,6 +9,7 @@ import co.com.poli.appcreditos.model.Credito;
 import java.util.List;
 import co.com.poli.appcreditos.business.ICreditoBusiness;
 import co.com.poli.appcreditos.dao.implementation.CreditoDaoImpl;
+import co.com.poli.appcreditos.data.DatosCredito;
 
 /**
  *
@@ -27,12 +28,19 @@ public class CreditoBusinessImpl implements ICreditoBusiness{
 
     @Override
     public String ObtenerCreditoMasutilizado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return creditoDaoImpl.ObtenerCreditoMasutilizado();
     }
 
     @Override
     public String CrearCredito(Credito credito) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String response = "Credit already exist";
+        if(credito.getNroCredito().equals(creditoDaoImpl.ObtenerCredito(credito.getNroCredito()))){
+            response = "Credit already exist";
+        }else{
+            creditoDaoImpl.CrearCredito(credito);
+            response = "Credit created successfully";
+        }
+        return response;        
     }
 
     @Override
@@ -43,6 +51,11 @@ public class CreditoBusinessImpl implements ICreditoBusiness{
     @Override
     public String ObtenerPrestamistas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Credito ObtenerCredito(String NroCredito) {
+        return creditoDaoImpl.ObtenerCredito(NroCredito);
     }
     
 }

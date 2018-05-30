@@ -9,17 +9,16 @@
         <meta name="author" content="">
         <link rel="icon" href="../../../../favicon.ico">
 
-        <title>Signin Template for Bootstrap</title>
+        <title>Signin to Credits</title>
 
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.servletContext.contextPath}/css/signin.css" rel="stylesheet">
     </head>
-
+<br><br><br><br><br><br><br><br><br>
     <body class="text-center">
         <form class="form-signin" action="${pageContext.servletContext.contextPath}/views/Menu.jsp"
-            <p class="mt-5 mb-3 text-muted">Bienvenido</p>
+              <p class="mt-5 mb-3 text-muted" style="background-color: white;">Bienvenido</p>
             <button class="btn btn-lg btn-primary btn-block" type="submit" >Ingresar</button>
-            <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
         </form>
     </body>
 </html>
