@@ -34,12 +34,8 @@ public class CreditoBusinessImpl implements ICreditoBusiness{
     @Override
     public String CrearCredito(Credito credito) {
         String response = "Credit already exist";
-        if(credito.getNroCredito().equals(creditoDaoImpl.ObtenerCredito(credito.getNroCredito()))){
-            response = "Credit already exist";
-        }else{
-            creditoDaoImpl.CrearCredito(credito);
-            response = "Credit created successfully";
-        }
+        creditoDaoImpl.CrearCredito(credito);
+        response = "Credit created successfully";
         return response;        
     }
 

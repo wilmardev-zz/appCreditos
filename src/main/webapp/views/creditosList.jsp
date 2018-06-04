@@ -81,14 +81,14 @@
                 <c:forEach var="credito" items="${sessionScope.creditosList}">
 
                     <tr class="text-center">
-                        <td><c:out value="${credito.getNroCredito()}"/></td>
-                        <td><c:out value="${credito.getNroDocumento()}"/></td>
-                        <td><c:out value="${credito.getNombres()}"/></td>
-                        <td><c:out value="${credito.getApellidos()}"/></td>
-                        <td><c:out value="${credito.getMonto()}"/></td>
-                        <td><c:out value="${credito.getTipoTrabajador()}"/></td>
-                        <td><c:out value="${credito.getTipoCredito()}"/></td>
-                        <td><c:out value="${credito.isTrabajaCompañia()}"/></td>
+                        <td><c:out value="${credito.getId()}"/></td>
+                        <td><c:out value="${credito.getDocumentopersona()}"/></td>
+                        <td><c:out value="${credito.getNombrepersona()}"/></td>
+                        <td><c:out value="${credito.getApellidopersona()}"/></td>
+                        <td><c:out value="${credito.getMontocredito()}"/></td>
+                        <td><c:out value="${credito.getTipotrabajador().getTipotrabajador()}"/></td>
+                        <td><c:out value="${credito.getTipocredito().getTipocredito()}"/></td>
+                        <td><c:out value="${credito.getTrabajacompania()}"/></td>
                         
                     </tr>
             </c:forEach>

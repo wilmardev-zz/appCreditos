@@ -21,7 +21,7 @@ public class DatosCredito {
         listCredit = new ArrayList<Credito>(){
             {
                 add(new Credito("123","12234","Luisa","Tangarife", 1000.00, 1, 1, Boolean.FALSE));
-                add(new Credito("12","123","Luisa","Tangarife", 1000.00, 1, 2, Boolean.FALSE));
+                add(new Credito("12","12234","Luisa","Tangarife", 1000.00, 1, 2, Boolean.FALSE));
                 add(new Credito("54","547","Luisa","Tangarife", 1000.00, 1, 2, Boolean.FALSE));
                 add(new Credito("324","76865","Luisa","Tangarife", 1000.00, 1, 2, Boolean.FALSE));
             }

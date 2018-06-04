@@ -165,3 +165,16 @@
 
 </body>
 </html>
+
+
+<script type="text/javascript">
+
+    window.onload = alertMessage;
+    function alertMessage() {
+        var MsgCreated =  '<%=session.getAttribute("ExceptionCreated")%>';
+        if (MsgCreated != "null") {
+            alertify.alert('Error', MsgCreated);
+            MsgCreated = "null";
+        }
+    }
+</script>
