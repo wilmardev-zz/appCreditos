@@ -44,14 +44,15 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="${pageContext.servletContext.contextPath}/views/Menu.jsp">CreditosApp</a>
+                            <a class="navbar-brand" href="${pageContext.servletContext.contextPath}/views/Menu.jsp">CreditsApp</a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li><a href="${pageContext.servletContext.contextPath}/views/creditos.jsp">Credits</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=Listar">List Credits</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=CredMasUtilizado">Most used Credit</a></li>
-                                <li><a href="#" >Credit highest accumulated</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=CredMasAcum">Credit highest accumulated</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=MayorPrestamista">Biggest Lender</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/index.jsp" class="navbar-right">Sign out</a></li>
                             </ul>
                         </div>

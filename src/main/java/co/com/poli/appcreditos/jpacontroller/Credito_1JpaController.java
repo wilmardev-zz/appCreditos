@@ -199,5 +199,93 @@ public class Credito_1JpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public String ObtenerCreditoMasutilizado() {
+        List<Credito_1> listaCred = findCredito_1Entities();
+        int contVivienda = 0;
+        int contEstudio = 0;
+        int contInversion = 0;
+        String mayor = "";
+        for (Credito_1 cred : listaCred) {
+            switch (cred.getTipocredito().getId()) {
+                case 1:
+                    contVivienda++;
+                    break;
+                case 2:
+                    contEstudio++;
+                    break;
+                case 3:
+                    contInversion++;
+                    break;
+            }
+        }
+
+        if (contVivienda > contEstudio) {
+            if (contVivienda > contInversion) {
+                mayor = "Vivienda";
+            }
+        } else if (contEstudio > contInversion) {
+            mayor = "Estudio";
+        } else if (contInversion > contVivienda) {
+            mayor = "Libre Inversion";
+        }
+        return mayor;
+    }
+
+    public String ObtenerPrestamoMayorAcumulado() {
+        List<Credito_1> listaCred = findCredito_1Entities();
+        double acumVivienda = 0;
+        double acumtEstudio = 0;
+        double acumtInversion = 0;
+        String mayor = "";
+        for (Credito_1 cred : listaCred) {
+            switch (cred.getTipocredito().getId()) {
+                case 1:
+                    acumVivienda += cred.getMontocredito();
+                    break;
+                case 2:
+                    acumtEstudio += cred.getMontocredito();
+                    break;
+                case 3:
+                    acumtInversion += cred.getMontocredito();
+                    break;
+            }
+        }
+
+        if (acumVivienda > acumtEstudio) {
+            if (acumVivienda > acumtInversion) {
+                mayor = "Vivienda, con un total de: " + acumVivienda;
+            }
+        } else if (acumtEstudio > acumtInversion) {
+            mayor = "Estudio, con un total de: " + acumtEstudio;
+        } else if (acumtInversion > acumVivienda) {
+            mayor = "Libre Inversión Inversion, con un total de: " + acumtInversion;
+        }
+        return mayor;
+    }
+
+    public String ObtenerMayorPrestamista() {
+        String mayor = "";
+        List<Credito_1> listaCred = findCredito_1Entities();
+        int contIndep = 0;
+        int contDep = 0;
+        for (Credito_1 cred : listaCred) {
+            switch (cred.getTipotrabajador().getId()) {
+                case 1:
+                    contIndep++;
+                    break;
+                case 2:
+                    contDep++;
+                    break;
+            }
+        }
+
+        if (contIndep >= contDep) {
+            mayor = "Independiente";
+        } else {
+            mayor = "Dependiente";
+        }
+        return mayor;
+    }
+
 }

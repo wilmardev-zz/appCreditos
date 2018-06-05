@@ -35,7 +35,7 @@ import javax.transaction.UserTransaction;
  * @author wilmar.duque
  */
 public class CreditoServlet extends HttpServlet {
-    
+
     private String NroDocumento;
     private String Nombres;
     private String Apellidos;
@@ -57,27 +57,30 @@ public class CreditoServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         RequestDispatcher rd = null;
-        CreditoBusinessImpl cBusinessImpl = new CreditoBusinessImpl();
+        //CreditoBusinessImpl cBusinessImpl = new CreditoBusinessImpl();
         Credito_1JpaController jpaCreditoController = new Credito_1JpaController(JPAFactory.getEMFACTORY());
         TipotrabajadorJpaController jpaTipoTrabajadorController = new TipotrabajadorJpaController(JPAFactory.getEMFACTORY());
         TipocreditoJpaController jpaTipoCreditoController = new TipocreditoJpaController(JPAFactory.getEMFACTORY());
         List<Credito_1> creditoList;
 
         String action = request.getParameter("action");
-        session.setAttribute("creditoMasUtilizado", "null");
-        session.setAttribute("ExceptionCreated", "null");
 
-        if (!action.equals("Listar")) {
+        limpiarMensajes(session);
+        String resp = "";
+        if (action.equals("Create")) {
             NroDocumento = request.getParameter("txtNroDocumento");
             Nombres = request.getParameter("txtNombres");
             Apellidos = request.getParameter("txtApellidos");
             Monto = Double.valueOf(request.getParameter("txtMonto"));
             TipoTrabajador = Integer.parseInt(request.getParameter("txtTipoTrabajador")); //1-Independiente; 2-Dependiente
             TipoCredito = Integer.parseInt(request.getParameter("txtTipoCredito")); //1-Vivienda, 2-Estudio, 3-LibreInversion
-            TrabajaCompania = Boolean.parseBoolean(request.getParameter("txtTrabajaCompañia"));
+            TrabajaCompania = Boolean.parseBoolean(request.getParameter("txtTrabajaCompania"));
         }
         switch (action) {
             case "Create":
+
+                limpiarMensajes(session);
+
                 Credito_1 jpaCredito = new Credito_1(jpaCreditoController.getCredito_1Count() + 1);
                 jpaCredito.setDocumentopersona(NroDocumento);
                 jpaCredito.setNombrepersona(Nombres);
@@ -118,32 +121,38 @@ public class CreditoServlet extends HttpServlet {
 //                    session.setAttribute("creditoCreated", mensaje);
 //                    List<Credito> creditoList = cBusinessImpl.ObtenerCreditos();
                         creditoList = jpaCreditoController.findCredito_1Entities();
-                        session.setAttribute("creditoList", creditoList);
-                        session.setAttribute("creditoMasUtilizado", "null");
-                        rd = request.getRequestDispatcher("views/creditosList.jsp");
+                        session.setAttribute("CreditoCreado", "Crédito creado correctamente.");
                     } catch (Exception ex) {
                         Logger.getLogger(CreditoServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 } else {
                     session.setAttribute("ExceptionCreated", "El usuario ya tiene actualmente un credito del mismo tipo");
-                    rd = request.getRequestDispatcher("views/creditos.jsp");
                 }
+                rd = request.getRequestDispatcher("views/creditos.jsp");
 
                 break;
             case "CredMasUtilizado":
-                String resp = cBusinessImpl.ObtenerCreditoMasutilizado();
+                limpiarMensajes(session);
+                resp = jpaCreditoController.ObtenerCreditoMasutilizado();//cBusinessImpl.ObtenerCreditoMasutilizado();
                 session.setAttribute("creditoMasUtilizado", resp);
                 rd = request.getRequestDispatcher("views/Menu.jsp");
                 break;
             case "CredMasAcum":
-
+                limpiarMensajes(session);
+                resp = jpaCreditoController.ObtenerPrestamoMayorAcumulado();//cBusinessImpl.ObtenerCreditoMasutilizado();
+                session.setAttribute("creditoMayAcum", resp);
+                rd = request.getRequestDispatcher("views/Menu.jsp");
                 break;
             case "MayorPrestamista":
-
+                limpiarMensajes(session);
+                resp = jpaCreditoController.ObtenerMayorPrestamista();
+                session.setAttribute("MayorPrestamista", resp);
+                rd = request.getRequestDispatcher("views/Menu.jsp");
                 break;
 
             case "Listar":
+                limpiarMensajes(session);
                 creditoList = jpaCreditoController.findCredito_1Entities();
                 session.setAttribute("creditosList", creditoList);
                 rd = request.getRequestDispatcher("views/creditosList.jsp");
@@ -192,5 +201,14 @@ public class CreditoServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void limpiarMensajes(HttpSession session) {
+        String nulle = "null";
+        session.setAttribute("creditoMasUtilizado", nulle);
+        session.setAttribute("ExceptionCreated", nulle);
+        session.setAttribute("CreditoCreado", nulle);
+        session.setAttribute("creditoMayAcum", nulle);
+        session.setAttribute("MayorPrestamista", nulle);
+    }
 
 }

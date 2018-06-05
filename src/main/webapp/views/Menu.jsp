@@ -23,8 +23,8 @@
 
         <!-- Custom styles for this template -->
         <link href="${pageContext.servletContext.contextPath}/css/carousel.css" rel="stylesheet">
-        
-                <!-- CSS -->
+
+        <!-- CSS -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/alertify.min.css"/>
         <!-- Default theme -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/default.min.css"/>
@@ -33,12 +33,12 @@
         <!-- Bootstrap theme -->
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/bootstrap.min.css"/>
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/alertify.min.js"></script>
-        
+
     </head>
     <!-- NAVBAR
     ================================================== -->
     <body>
-        
+
         <div class="navbar-wrapper">
             <div class="container">
 
@@ -51,14 +51,15 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="${pageContext.servletContext.contextPath}/views/Menu.jsp">CreditosApp</a>
+                            <a class="navbar-brand" href="${pageContext.servletContext.contextPath}/views/Menu.jsp">CreditsApp</a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li><a href="${pageContext.servletContext.contextPath}/views/creditos.jsp">Credits</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=Listar">List Credits</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=CredMasUtilizado">Most used Credit</a></li>
-                                <li><a href="#" >Credit highest accumulated</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=CredMasAcum">Credit highest accumulated</a></li>
+                                <li><a href="${pageContext.servletContext.contextPath}/CreditoServlet?action=MayorPrestamista">Biggest Lender</a></li>
                                 <li><a href="${pageContext.servletContext.contextPath}/index.jsp" class="navbar-right">Sign out</a></li>
                             </ul>
                         </div>
@@ -67,8 +68,8 @@
             </div>
         </div>
 
-                <!-- Carousel
-        ================================================== -->
+        <!-- Carousel
+================================================== -->
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -135,13 +136,13 @@
                     <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
                     <h2>Credit highest accumulated</h2>
                     <p>In this section you will be senn which is the credit with highest accumulated in the company.</p>
-                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                    <p><a class="btn btn-default" href="${pageContext.servletContext.contextPath}/CreditoServlet?action=CredMasAcum" role="button">View details &raquo;</a></p>
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4">
                     <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-                    <h2>More</h2>
-                    <p>New options will arrive soon. Be patient!</p>
-                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                    <h2>Biggest Lender</h2>
+                    <p>Here you will be which is the biggest lender in the company!</p>
+                    <p><a class="btn btn-default" href="${pageContext.servletContext.contextPath}/CreditoServlet?action=MayorPrestamista" role="button">View details &raquo;</a></p>
                 </div><!-- /.col-lg-4 -->
             </div><!-- /.row -->
 
@@ -170,10 +171,20 @@
 
     window.onload = alertMessage;
     function alertMessage() {
-        var MsgCreated =  '<%=session.getAttribute("creditoMasUtilizado")%>';
+        var MsgCreated = '<%=session.getAttribute("creditoMasUtilizado")%>';
+        var MsgCredMayAcum = '<%=session.getAttribute("creditoMayAcum")%>';
+        var MsgMayorPrestamista = '<%=session.getAttribute("MayorPrestamista")%>'; 
         if (MsgCreated != "null") {
-            alertify.alert('Credito Más Utilizado', MsgCreated);
+            alertify.alert('Credito Más Utilizado', 'El crédito más utilizado por los clientes es de tipo: ' + MsgCreated);
             MsgCreated = "null";
+        }
+        if (MsgCredMayAcum != "null") {
+            alertify.alert('Credito con mayo Acumulado', 'El crédito con mayor acumulado es de tipo ' + MsgCredMayAcum);
+            MsgCredMayAcum = "null";
+        }
+        if (MsgMayorPrestamista != "null") {
+            alertify.alert('Mayor prestamista', 'El tipo de trabajador que más obtiene crédito es de tipo: ' + MsgMayorPrestamista);
+            MsgMayorPrestamista = "null";
         }
     }
 </script>
